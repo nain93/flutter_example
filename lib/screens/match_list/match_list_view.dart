@@ -43,15 +43,13 @@ class _MatchListViewState extends ConsumerState<MatchListView>
               child: TabBarView(
                 controller: tabController,
                 children: [
-                  SingleChildScrollView(
+                  ListView.builder(
+                    itemCount: 10,
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 20),
-                    child: Column(
-                      children: List.generate(
-                        20,
-                        (index) => const MatchTile(),
-                      ),
-                    ),
+                    itemBuilder: (context, index) {
+                      return const MatchTile();
+                    },
                   ),
                   SingleChildScrollView(
                     child: Column(

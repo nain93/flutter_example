@@ -21,7 +21,7 @@ class BottomNavigationListType {
     required this.icon,
   });
   final String text;
-  final Widget icon;
+  final IconData icon;
 }
 
 class _MainBottomTabState extends ConsumerState<MainBottomTab> {
@@ -29,19 +29,19 @@ class _MainBottomTabState extends ConsumerState<MainBottomTab> {
   List<BottomNavigationListType> tabList = [
     const BottomNavigationListType(
       text: '홈',
-      icon: Icon(Icons.home),
+      icon: Icons.home,
     ),
     const BottomNavigationListType(
       text: '경기 목록',
-      icon: Icon(Icons.sports_baseball),
+      icon: Icons.sports_baseball,
     ),
     const BottomNavigationListType(
       text: '메세지',
-      icon: Icon(Icons.message),
+      icon: Icons.message,
     ),
     const BottomNavigationListType(
       text: '마이 페이지',
-      icon: Icon(Icons.person),
+      icon: Icons.person,
     ),
   ];
 
@@ -73,8 +73,9 @@ class _MainBottomTabState extends ConsumerState<MainBottomTab> {
       bottomNavigationBar: BottomAppBar(
         // surfaceTintColor: Colors.transparent,
         padding: const EdgeInsets.all(0),
+        color: Theme.of(context).colorScheme.primary,
         elevation: 0,
-
+        height: 60,
         child: Row(
           children: tabList.map((tab) {
             var index = tabList.indexOf(tab);
@@ -84,9 +85,25 @@ class _MainBottomTabState extends ConsumerState<MainBottomTab> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    tab.icon,
-                    const Gap(5),
-                    Text(tab.text),
+                    Icon(
+                      tab.icon,
+                      size: 20,
+                      color: currentIndex == index
+                          ? Theme.of(context).colorScheme.onPrimary
+                          : Theme.of(context).colorScheme.onSecondary,
+                    ),
+                    const Gap(3),
+                    Text(
+                      tab.text,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: currentIndex == index
+                                ? Theme.of(context).colorScheme.onPrimary
+                                : Theme.of(context).colorScheme.onSecondary,
+                            fontWeight: currentIndex == index
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                          ),
+                    ),
                   ],
                 ),
               ),

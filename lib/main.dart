@@ -55,17 +55,17 @@ class _MyAppState extends ConsumerState<MyApp> {
         textTheme: const TextTheme(
           titleLarge: TextStyle(
             fontSize: 22,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
           titleMedium: TextStyle(
             fontSize: 18,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
           titleSmall: TextStyle(
             fontSize: 16,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
           bodyLarge: TextStyle(
@@ -89,11 +89,14 @@ class _MyAppState extends ConsumerState<MyApp> {
             color: Colors.black,
           ),
         ),
+        scaffoldBackgroundColor: Colors.white,
         dialogBackgroundColor: Theme.of(context).colorScheme.surface,
         dividerColor: const Color(0xffe0e0e0),
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF7772AC),
-          onPrimary: const Color(0xFF7772AC),
+          // onPrimary: const Color(0xFF7772AC),
+          primary: const Color.fromARGB(255, 24, 24, 24),
+          onPrimary: Colors.white,
           onPrimaryContainer: const Color(0xFF4B5A76),
           primaryContainer: const Color(0xFFEFEFF9),
           surface: const Color(0xFFA6A6A6),

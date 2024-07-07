@@ -83,7 +83,7 @@ class Button extends StatelessWidget {
                 ? _renderLoading(context)
                 : Text(
                     text!,
-                    style: Theme.of(context).textTheme.titleMedium!.merge(
+                    style: Theme.of(context).textTheme.titleSmall!.merge(
                           TextStyle(color: color, fontWeight: fontWeight)
                               .merge(textStyle),
                         ),
@@ -105,7 +105,7 @@ class Button extends StatelessWidget {
       autofocus: autofocus,
       style: ElevatedButton.styleFrom(
         backgroundColor:
-            backgroundColor ?? Theme.of(context).colorScheme.onPrimary,
+            backgroundColor ?? Theme.of(context).colorScheme.primary,
         padding: padding,
         fixedSize: Size(width ?? double.infinity, height),
         textStyle: TextStyle(color: color, fontWeight: FontWeight.w600)

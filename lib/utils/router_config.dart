@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/screens/home/create_room_view.dart';
 import 'package:flutter_example/screens/home/home_view.dart';
 import 'package:flutter_example/screens/match_list/match_list_view.dart';
+import 'package:flutter_example/screens/message/chat_room_view.dart';
 import 'package:flutter_example/screens/message/message_view.dart';
 import 'package:flutter_example/screens/my/my_view.dart';
 import 'package:flutter_example/widgets/main_bottom_tab.dart';
@@ -15,6 +17,8 @@ enum GoRoutes {
   matchList,
   message,
   my,
+  createRoom,
+  chatRoom,
 }
 
 extension GoRoutesName on GoRoutes {
@@ -89,16 +93,29 @@ final routeProvider = Provider(
         },
         routes: [
           GoRoute(
-            name: GoRoutes.home.name,
-            path: GoRoutes.home.fullPath,
-            pageBuilder: (context, state) {
-              return buildPageWithDefaultTransition<void>(
-                context: context,
-                state: state,
-                child: const HomeView(),
-              );
-            },
-          ),
+              name: GoRoutes.home.name,
+              path: GoRoutes.home.fullPath,
+              pageBuilder: (context, state) {
+                return buildPageWithDefaultTransition<void>(
+                  context: context,
+                  state: state,
+                  child: const HomeView(),
+                );
+              },
+              routes: [
+                GoRoute(
+                  parentNavigatorKey: rootNavigatorKey,
+                  name: GoRoutes.createRoom.name,
+                  path: GoRoutes.createRoom.path,
+                  pageBuilder: (context, state) {
+                    return buildIosPageTransitions<void>(
+                      context: context,
+                      state: state,
+                      child: const CreateRoomView(),
+                    );
+                  },
+                ),
+              ]),
           GoRoute(
             name: GoRoutes.matchList.name,
             path: GoRoutes.matchList.fullPath,
@@ -111,16 +128,29 @@ final routeProvider = Provider(
             },
           ),
           GoRoute(
-            name: GoRoutes.message.name,
-            path: GoRoutes.message.fullPath,
-            pageBuilder: (context, state) {
-              return buildPageWithDefaultTransition<void>(
-                context: context,
-                state: state,
-                child: const MessageView(),
-              );
-            },
-          ),
+              name: GoRoutes.message.name,
+              path: GoRoutes.message.fullPath,
+              pageBuilder: (context, state) {
+                return buildPageWithDefaultTransition<void>(
+                  context: context,
+                  state: state,
+                  child: const MessageView(),
+                );
+              },
+              routes: [
+                GoRoute(
+                  parentNavigatorKey: rootNavigatorKey,
+                  name: GoRoutes.chatRoom.name,
+                  path: GoRoutes.chatRoom.path,
+                  pageBuilder: (context, state) {
+                    return buildIosPageTransitions<void>(
+                      context: context,
+                      state: state,
+                      child: const ChatRoomView(),
+                    );
+                  },
+                ),
+              ]),
           GoRoute(
             name: GoRoutes.my.name,
             path: GoRoutes.my.fullPath,
