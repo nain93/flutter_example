@@ -45,14 +45,16 @@ class MatchTile extends HookConsumerWidget {
                       onPressed: () {},
                       text: '직관모집',
                       height: 40,
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 10),
                     ),
                     const Gap(5),
                     Button(
                       onPressed: () {},
                       text: '예매하기',
                       height: 40,
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 10),
                     ),
                   ],
                 ),

@@ -16,7 +16,7 @@ class Button extends StatelessWidget {
     this.height = 52,
     this.onPressed,
     this.color = Colors.white,
-    this.fontWeight = FontWeight.w600,
+    this.fontWeight = FontWeight.w700,
     this.backgroundColor,
     this.disabledBackgroundColor,
     this.showContainerBackground = false,
@@ -75,23 +75,24 @@ class Button extends StatelessWidget {
   Widget _renderContent(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        leftWidget ?? const SizedBox(),
-        SizedBox(
-          child: Center(
-            child: loading
-                ? _renderLoading(context)
-                : Text(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: loading
+          ? [_renderLoading(context)]
+          : [
+              leftWidget ?? const SizedBox(),
+              SizedBox(
+                child: Center(
+                  child: Text(
                     text!,
                     style: Theme.of(context).textTheme.titleSmall!.merge(
                           TextStyle(color: color, fontWeight: fontWeight)
                               .merge(textStyle),
                         ),
                   ),
-          ),
-        ),
-        rightWidget ?? const SizedBox(),
-      ],
+                ),
+              ),
+              rightWidget ?? const SizedBox(),
+            ],
     );
   }
 
@@ -110,29 +111,40 @@ class Button extends StatelessWidget {
         fixedSize: Size(width ?? double.infinity, height),
         textStyle: TextStyle(color: color, fontWeight: FontWeight.w600)
             .merge(textStyle),
-        // disabledBackgroundColor:
-        //     disabledBackgroundColor ?? Theme.of(context).colorScheme.onSurface,
         elevation: 0,
-      ).merge(ButtonStyle(
-        overlayColor: WidgetStateProperty.all<Color>(Colors.black12),
-        shape: borderShape ??
-            (borderWidth != 0.0
-                ? WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(borderRadius),
-                      side: BorderSide(
-                        color: borderColor ??
-                            Theme.of(context).colorScheme.onSurface,
-                        width: borderWidth,
+        disabledBackgroundColor:
+            disabledBackgroundColor ?? Theme.of(context).colorScheme.onSurface,
+      ).merge(
+        ButtonStyle(
+          surfaceTintColor: WidgetStateProperty.all<Color?>(Colors.transparent),
+          overlayColor: WidgetStateProperty.resolveWith<Color?>((states) {
+            if (states.contains(WidgetState.pressed)) {
+              if (backgroundColor == null || backgroundColor == Colors.black) {
+                return Colors.white.withOpacity(0.1);
+              }
+              return Colors.black.withOpacity(0.1);
+            }
+            return null; // <-- Splash color
+          }),
+          shape: borderShape ??
+              (borderWidth != 0.0
+                  ? WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(borderRadius),
+                        side: BorderSide(
+                          color: borderColor ??
+                              Theme.of(context).colorScheme.onSurface,
+                          width: borderWidth,
+                        ),
                       ),
-                    ),
-                  )
-                : WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(borderRadius),
-                    ),
-                  )),
-      )),
+                    )
+                  : WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(borderRadius),
+                      ),
+                    )),
+        ),
+      ),
       child: _renderContent(context),
     );
   }
@@ -141,11 +153,7 @@ class Button extends StatelessWidget {
     return OutlinedButton(
       autofocus: autofocus,
       clipBehavior: Clip.none,
-      onPressed: loading
-          ? () {}
-          : !disabled
-              ? onPressed
-              : null,
+      onPressed: (loading || disabled) ? null : onPressed,
       style: OutlinedButton.styleFrom(
         side: BorderSide(color: color, width: 1),
         padding: padding,
@@ -197,6 +205,7 @@ class CircleIconButton extends StatefulWidget {
     this.width,
     this.height,
     this.backgroundColor,
+    this.isShadow = false,
     this.padding,
   });
   final Function() onPressed;
@@ -204,6 +213,7 @@ class CircleIconButton extends StatefulWidget {
   final double? width;
   final double? height;
   final Color? backgroundColor;
+  final bool isShadow;
   final EdgeInsets? padding;
 
   @override
@@ -217,17 +227,36 @@ class _CircleIconButtonState extends State<CircleIconButton> {
       width: widget.width,
       height: widget.height,
       padding: widget.padding ?? const EdgeInsets.all(0),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: widget.backgroundColor ?? Colors.white,
+        boxShadow: widget.isShadow
+            ? [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  spreadRadius: 1,
+                  blurRadius: 10,
+                  offset: const Offset(0, 1), // changes position of shadow
+                ),
+              ]
+            : null,
+      ),
       child: ElevatedButton(
         onPressed: widget.onPressed,
         style: ButtonStyle(
           padding: WidgetStateProperty.all(const EdgeInsets.all(0)),
           elevation: WidgetStateProperty.all(0),
           shape: WidgetStateProperty.all(const CircleBorder()),
+          surfaceTintColor: WidgetStateProperty.all<Color?>(Colors.transparent),
           backgroundColor: WidgetStateProperty.all(
             widget.backgroundColor ?? Colors.white,
           ), // <-- Button color
+
           overlayColor: WidgetStateProperty.resolveWith<Color?>((states) {
             if (states.contains(WidgetState.pressed)) {
+              if (widget.backgroundColor == Colors.black) {
+                return Colors.white.withOpacity(0.1);
+              }
               return Colors.black.withOpacity(0.1);
             }
             return null; // <-- Splash color

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_example/utils/config.dart';
 import 'package:flutter_example/utils/router_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 
 class RiverpodLogger extends ProviderObserver {
   @override
@@ -20,7 +23,13 @@ RIVERPOD>>
   }
 }
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: '.env');
+  KakaoSdk.init(
+    nativeAppKey: Config().nativeAppKey,
+    javaScriptAppKey: Config().javascriptAppKey,
+  );
   runApp(ProviderScope(observers: [RiverpodLogger()], child: const MyApp()));
 }
 

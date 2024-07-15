@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/repositories/token_repository.dart';
 import 'package:flutter_example/screens/home/create_room_view.dart';
 import 'package:flutter_example/screens/home/home_view.dart';
 import 'package:flutter_example/screens/match_list/match_list_view.dart';
 import 'package:flutter_example/screens/message/chat_room_view.dart';
 import 'package:flutter_example/screens/message/message_view.dart';
 import 'package:flutter_example/screens/my/my_view.dart';
+import 'package:flutter_example/screens/signin/sign_in_view.dart';
 import 'package:flutter_example/widgets/main_bottom_tab.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,6 +15,7 @@ final rootNavigatorKey = GlobalKey<NavigatorState>();
 final shellNavigatorKey = GlobalKey<NavigatorState>();
 
 enum GoRoutes {
+  signIn,
   home,
   matchList,
   message,
@@ -80,7 +83,12 @@ final routeProvider = Provider(
   (ref) => GoRouter(
     navigatorKey: rootNavigatorKey,
     initialLocation: GoRoutes.home.fullPath,
-    redirect: (context, state) {
+    redirect: (context, state) async {
+      var token = await TokenRepository.instance.getToken();
+      if (token == null) {
+        /// 토큰 없으면 signIn으로 리다이렉트
+        return GoRoutes.signIn.fullPath;
+      }
       return null;
     },
     routes: [
@@ -163,6 +171,17 @@ final routeProvider = Provider(
             },
           ),
         ],
+      ),
+      GoRoute(
+        name: GoRoutes.signIn.name,
+        path: GoRoutes.signIn.fullPath,
+        pageBuilder: (context, state) {
+          return buildIosPageTransitions<void>(
+            context: context,
+            state: state,
+            child: const SignInView(),
+          );
+        },
       ),
     ],
   ),
