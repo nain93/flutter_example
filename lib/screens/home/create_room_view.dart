@@ -12,14 +12,11 @@ class CreateRoomView extends StatefulHookConsumerWidget {
 class _CreateRoomViewState extends ConsumerState<CreateRoomView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       appBar: AppBarBack(
-        title: Text(
-          '직관 모집',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
+        title: '직관 모집',
       ),
-      body: const Center(
+      body: Center(
         child: Text('Create Room View'),
       ),
     );

@@ -100,17 +100,26 @@ class _MyAppState extends ConsumerState<MyApp> {
         ),
         scaffoldBackgroundColor: Colors.white,
         dialogBackgroundColor: Theme.of(context).colorScheme.surface,
+        // buttonTheme: ButtonThemeData(
+        //   buttonColor: const Color(0xFF7772AC),
+        //   textTheme: ButtonTextTheme.primary,
+        //   shape: RoundedRectangleBorder(
+        //     borderRadius: BorderRadius.circular(5),
+        //   ),
+        // ),
         dividerColor: const Color(0xffe0e0e0),
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF7772AC),
-          // onPrimary: const Color(0xFF7772AC),
-          primary: const Color.fromARGB(255, 24, 24, 24),
+          // primary: Colors.blueAccent,
+          primary: const Color(0XffDC143C),
+
           onPrimary: Colors.white,
+
           onPrimaryContainer: const Color(0xFF4B5A76),
           primaryContainer: const Color(0xFFEFEFF9),
-          surface: const Color(0xFFA6A6A6),
+          surface: const Color.fromARGB(255, 177, 177, 177),
           // onSurface: const Color(0xFFF4F9F8),
-          onSecondary: const Color(0xFF787878),
+          onSecondary: const Color.fromARGB(255, 32, 32, 32),
           onSecondaryContainer: const Color(0xFFEFEEF9),
           onTertiaryContainer: const Color(0xFF7773AC),
           onTertiary: const Color(0xffF8BD26),

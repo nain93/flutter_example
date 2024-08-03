@@ -22,7 +22,7 @@ class Button extends StatelessWidget {
     this.showContainerBackground = false,
     this.margin = const EdgeInsets.only(left: 0, right: 0),
     this.padding,
-    this.borderRadius = 8.0,
+    this.borderRadius = 5.0,
     this.borderWidth = 0.0,
     this.borderColor,
     this.loading = false,
@@ -106,14 +106,14 @@ class Button extends StatelessWidget {
       autofocus: autofocus,
       style: ElevatedButton.styleFrom(
         backgroundColor:
-            backgroundColor ?? Theme.of(context).colorScheme.primary,
+            backgroundColor ?? Theme.of(context).colorScheme.onSecondary,
         padding: padding,
         fixedSize: Size(width ?? double.infinity, height),
         textStyle: TextStyle(color: color, fontWeight: FontWeight.w600)
             .merge(textStyle),
         elevation: 0,
         disabledBackgroundColor:
-            disabledBackgroundColor ?? Theme.of(context).colorScheme.onSurface,
+            disabledBackgroundColor ?? Theme.of(context).colorScheme.surface,
       ).merge(
         ButtonStyle(
           surfaceTintColor: WidgetStateProperty.all<Color?>(Colors.transparent),

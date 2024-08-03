@@ -12,14 +12,11 @@ class ChatRoomView extends StatefulHookConsumerWidget {
 class _ChatRoomViewState extends ConsumerState<ChatRoomView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       appBar: AppBarBack(
-        title: Text(
-          '채팅방',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
+        title: '채팅방',
       ),
-      body: const Center(
+      body: Center(
         child: Text('Chat Room View'),
       ),
     );

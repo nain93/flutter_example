@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_example/providers/auth_provider.dart';
+import 'package:flutter_example/screens/signin/verify_phone_number_view.dart';
 import 'package:flutter_example/utils/router_config.dart';
 import 'package:flutter_example/widgets/button.dart';
 import 'package:gap/gap.dart';
@@ -41,9 +41,12 @@ class _SignInViewState extends ConsumerState<SignInView> {
             ? await kakao.UserApi.instance.loginWithKakaoTalk()
             : await kakao.UserApi.instance.loginWithKakaoAccount();
 
-        await ref.read(authProviderProvider.notifier).signIn(token.accessToken);
+        // await ref.read(authProviderProvider.notifier).signIn(token.accessToken);
         if (context.mounted) {
-          context.go(GoRoutes.home.fullPath);
+          context.push(
+            '${GoRoutes.signIn.fullPath}${GoRoutes.verifyPhoneNumber.fullPath}',
+            extra: VerifyPhoneNumberView(token: token.accessToken),
+          );
         }
       } catch (e) {
         // TODO: toast message
@@ -71,6 +74,11 @@ class _SignInViewState extends ConsumerState<SignInView> {
       // after they have been validated with Apple (see `Integration` section for more information on how to do this)
     }
 
+    // void handleEmailLogin() {
+    //   context
+    //       .push('${GoRoutes.signIn.fullPath}${GoRoutes.emailSignIn.fullPath}');
+    // }
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -83,22 +91,22 @@ class _SignInViewState extends ConsumerState<SignInView> {
                 textStyle: textStyle,
                 backgroundColor: const Color(0XFFFAE100),
                 borderRadius: 5,
-                text: '카카오톡으로 로그인',
+                text: '카카오톡으로 시작하기',
                 onPressed: handleKakaoLogin,
                 loading: kakaoLoading,
                 loadingColor: Colors.black,
               ),
               const Gap(10),
-              Button(
-                onPressed: () {},
-                borderColor: Colors.black,
-                borderWidth: 1,
-                textStyle: textStyle.copyWith(color: Colors.white),
-                backgroundColor: const Color(0XFF19CE60),
-                borderRadius: 5,
-                text: '네이버 로그인',
-              ),
-              const Gap(10),
+              // Button(
+              //   onPressed: () {},
+              //   borderColor: Colors.black,
+              //   borderWidth: 1,
+              //   textStyle: textStyle.copyWith(color: Colors.white),
+              //   backgroundColor: const Color(0XFF19CE60),
+              //   borderRadius: 5,
+              //   text: '네이버로 시작하기',
+              // ),
+              // const Gap(10),
               Button(
                 onPressed: () {},
                 borderColor: Colors.black,
@@ -106,7 +114,7 @@ class _SignInViewState extends ConsumerState<SignInView> {
                 borderRadius: 5,
                 textStyle: textStyle,
                 backgroundColor: Colors.white,
-                text: '구글 로그인',
+                text: '구글로 시작하기',
               ),
               const Gap(10),
               Platform.isIOS
@@ -117,9 +125,19 @@ class _SignInViewState extends ConsumerState<SignInView> {
                       textStyle: textStyle.copyWith(color: Colors.white),
                       backgroundColor: Colors.black,
                       borderRadius: 5,
-                      text: '애플 로그인',
+                      text: '애플로 시작하기',
                     )
                   : const SizedBox(),
+              const Gap(10),
+              // Button(
+              //   onPressed: handleEmailLogin,
+              //   borderColor: Colors.black,
+              //   borderWidth: 1,
+              //   textStyle: textStyle.copyWith(color: Colors.white),
+              //   backgroundColor: Theme.of(context).colorScheme.primary,
+              //   borderRadius: 5,
+              //   text: '이메일로 시작하기',
+              // ),
               const Gap(40),
             ],
           ),

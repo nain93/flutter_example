@@ -14,7 +14,7 @@ class AppBarBack extends StatelessWidget implements PreferredSizeWidget {
     this.onPressedBack,
     this.leadingWidth,
   });
-  final Widget? title;
+  final String? title;
   final Widget? leading;
   final List<Widget>? actions;
   final bool isBottomBorderDisplayed;
@@ -25,7 +25,12 @@ class AppBarBack extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: title,
+      title: title == null
+          ? const SizedBox()
+          : Text(
+              title!,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
       leadingWidth: leadingWidth,
       backgroundColor: Colors.white,
       leading: leading ??

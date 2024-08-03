@@ -6,7 +6,9 @@ import 'package:flutter_example/screens/match_list/match_list_view.dart';
 import 'package:flutter_example/screens/message/chat_room_view.dart';
 import 'package:flutter_example/screens/message/message_view.dart';
 import 'package:flutter_example/screens/my/my_view.dart';
+import 'package:flutter_example/screens/signin/email_sign_in_view.dart';
 import 'package:flutter_example/screens/signin/sign_in_view.dart';
+import 'package:flutter_example/screens/signin/verify_phone_number_view.dart';
 import 'package:flutter_example/widgets/main_bottom_tab.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,6 +18,8 @@ final shellNavigatorKey = GlobalKey<NavigatorState>();
 
 enum GoRoutes {
   signIn,
+  emailSignIn,
+  verifyPhoneNumber,
   home,
   matchList,
   message,
@@ -85,7 +89,9 @@ final routeProvider = Provider(
     initialLocation: GoRoutes.home.fullPath,
     redirect: (context, state) async {
       var token = await TokenRepository.instance.getToken();
-      if (token == null) {
+      if (token == null &&
+          state.fullPath != null &&
+          !state.fullPath!.contains('/sign-in')) {
         /// 토큰 없으면 signIn으로 리다이렉트
         return GoRoutes.signIn.fullPath;
       }
@@ -182,6 +188,33 @@ final routeProvider = Provider(
             child: const SignInView(),
           );
         },
+        routes: [
+          GoRoute(
+            name: GoRoutes.verifyPhoneNumber.name,
+            path: GoRoutes.verifyPhoneNumber.path,
+            pageBuilder: (context, state) {
+              var verifyPhoneNumber = state.extra as VerifyPhoneNumberView;
+              return buildIosPageTransitions<void>(
+                context: context,
+                state: state,
+                child: VerifyPhoneNumberView(
+                  token: verifyPhoneNumber.token,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            name: GoRoutes.emailSignIn.name,
+            path: GoRoutes.emailSignIn.path,
+            pageBuilder: (context, state) {
+              return buildIosPageTransitions<void>(
+                context: context,
+                state: state,
+                child: const EmailSignInView(),
+              );
+            },
+          ),
+        ],
       ),
     ],
   ),
