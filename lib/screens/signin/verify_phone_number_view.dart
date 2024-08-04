@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/utils/router_config.dart';
 import 'package:flutter_example/widgets/animated_switcher.dart';
 import 'package:flutter_example/widgets/app_bar.dart';
 import 'package:flutter_example/widgets/button.dart';
 import 'package:flutter_example/widgets/edit_text.dart';
 import 'package:flutter_example/widgets/error_text.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class VerifyPhoneNumberView extends StatefulHookConsumerWidget {
@@ -70,6 +72,8 @@ class _VerifyPhoneNumberViewState extends ConsumerState<VerifyPhoneNumberView> {
 
     void onPressedVerify() {
       // TODO: 번호 인증 확인 되면 토큰가지고 회원정보 입력화면으로 이동
+      context.push(
+          '${GoRoutes.signIn.fullPath}${GoRoutes.verifyPhoneNumber.fullPath}${GoRoutes.userInputInfo.fullPath}');
     }
 
     return Scaffold(
@@ -86,7 +90,7 @@ class _VerifyPhoneNumberViewState extends ConsumerState<VerifyPhoneNumberView> {
               EditText(
                 autofocus: true,
                 onChanged: onChangedName,
-                hintText: '이름을 입력해 주세요. (최대 10자)',
+                hintText: '이름을 입력해 주세요.',
                 maxLength: 10,
               ),
               const Gap(12),

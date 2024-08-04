@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_example/utils/config.dart';
 import 'package:flutter_example/utils/router_config.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 
 class RiverpodLogger extends ProviderObserver {
@@ -119,7 +120,7 @@ class _MyAppState extends ConsumerState<MyApp> {
           primaryContainer: const Color(0xFFEFEFF9),
           surface: const Color.fromARGB(255, 177, 177, 177),
           // onSurface: const Color(0xFFF4F9F8),
-          onSecondary: const Color.fromARGB(255, 32, 32, 32),
+          onSecondary: const Color.fromARGB(255, 47, 47, 47),
           onSecondaryContainer: const Color(0xFFEFEEF9),
           onTertiaryContainer: const Color(0xFF7773AC),
           onTertiary: const Color(0xffF8BD26),
@@ -130,6 +131,14 @@ class _MyAppState extends ConsumerState<MyApp> {
           inverseSurface: const Color(0xFFEEEEEE),
         ),
       ),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('ko', 'KR'),
+      ],
       routerConfig: ref.watch(routeProvider),
     );
   }

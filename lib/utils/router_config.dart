@@ -8,6 +8,7 @@ import 'package:flutter_example/screens/message/message_view.dart';
 import 'package:flutter_example/screens/my/my_view.dart';
 import 'package:flutter_example/screens/signin/email_sign_in_view.dart';
 import 'package:flutter_example/screens/signin/sign_in_view.dart';
+import 'package:flutter_example/screens/signin/user_input_info_view.dart';
 import 'package:flutter_example/screens/signin/verify_phone_number_view.dart';
 import 'package:flutter_example/widgets/main_bottom_tab.dart';
 import 'package:go_router/go_router.dart';
@@ -20,6 +21,7 @@ enum GoRoutes {
   signIn,
   emailSignIn,
   verifyPhoneNumber,
+  userInputInfo,
   home,
   matchList,
   message,
@@ -202,6 +204,19 @@ final routeProvider = Provider(
                 ),
               );
             },
+            routes: [
+              GoRoute(
+                name: GoRoutes.userInputInfo.name,
+                path: GoRoutes.userInputInfo.path,
+                pageBuilder: (context, state) {
+                  return buildIosPageTransitions<void>(
+                    context: context,
+                    state: state,
+                    child: const UserInputInfoView(),
+                  );
+                },
+              ),
+            ],
           ),
           GoRoute(
             name: GoRoutes.emailSignIn.name,
