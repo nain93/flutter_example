@@ -73,42 +73,52 @@ class _MainBottomTabState extends ConsumerState<MainBottomTab> {
       bottomNavigationBar: BottomAppBar(
         // surfaceTintColor: Colors.transparent,
         padding: const EdgeInsets.all(0),
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.onPrimary,
         elevation: 0,
         height: 60,
-        child: Row(
-          children: tabList.map((tab) {
-            var index = tabList.indexOf(tab);
-            return Expanded(
-              child: InkWell(
-                onTap: () => tap(index),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      tab.icon,
-                      size: 20,
-                      color: currentIndex == index
-                          ? Theme.of(context).colorScheme.onPrimary
-                          : Theme.of(context).colorScheme.onSecondary,
-                    ),
-                    const Gap(3),
-                    Text(
-                      tab.text,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: currentIndex == index
-                                ? Theme.of(context).colorScheme.onPrimary
-                                : Theme.of(context).colorScheme.onSecondary,
-                            fontWeight: currentIndex == index
-                                ? FontWeight.bold
-                                : FontWeight.normal,
-                          ),
-                    ),
-                  ],
-                ),
+
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide(
+                color: Theme.of(context).colorScheme.onSecondaryContainer,
               ),
-            );
-          }).toList(),
+            ),
+          ),
+          child: Row(
+            children: tabList.map((tab) {
+              var index = tabList.indexOf(tab);
+              return Expanded(
+                child: InkWell(
+                  onTap: () => tap(index),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        tab.icon,
+                        size: 20,
+                        color: currentIndex == index
+                            ? Theme.of(context).colorScheme.onSecondary
+                            : Theme.of(context).colorScheme.surface,
+                      ),
+                      const Gap(3),
+                      Text(
+                        tab.text,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: currentIndex == index
+                                  ? Theme.of(context).colorScheme.onSecondary
+                                  : Theme.of(context).colorScheme.surface,
+                              fontWeight: currentIndex == index
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );

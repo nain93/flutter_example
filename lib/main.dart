@@ -99,6 +99,7 @@ class _MyAppState extends ConsumerState<MyApp> {
             color: Colors.black,
           ),
         ),
+
         scaffoldBackgroundColor: Colors.white,
         dialogBackgroundColor: Theme.of(context).colorScheme.surface,
         // buttonTheme: ButtonThemeData(
@@ -110,12 +111,11 @@ class _MyAppState extends ConsumerState<MyApp> {
         // ),
         dividerColor: const Color(0xffe0e0e0),
         colorScheme: ColorScheme.fromSeed(
+          surfaceContainer: const Color(0xFFEBEBEB),
           seedColor: const Color(0xFF7772AC),
           // primary: Colors.blueAccent,
           primary: const Color(0XffDC143C),
-
           onPrimary: Colors.white,
-
           onPrimaryContainer: const Color(0xFF4B5A76),
           primaryContainer: const Color(0xFFEFEFF9),
           surface: const Color.fromARGB(255, 177, 177, 177),

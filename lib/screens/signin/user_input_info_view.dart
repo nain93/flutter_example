@@ -1,15 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_example/constants/constants.dart';
+import 'package:flutter_example/screens/signin/team_select_view.dart';
+import 'package:flutter_example/utils/router_config.dart';
+import 'package:flutter_example/utils/utils.dart';
 import 'package:flutter_example/widgets/app_bar.dart';
 import 'package:flutter_example/widgets/button.dart';
 import 'package:flutter_example/widgets/edit_text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class UserInputInfoView extends StatefulHookConsumerWidget {
-  const UserInputInfoView({super.key});
+  const UserInputInfoView({super.key, required this.token});
+  final String token;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -50,7 +54,10 @@ class _UserInputInfoViewState extends ConsumerState<UserInputInfoView> {
     }
 
     void onPressedComplete() {
-      // TODO : 팀선택 화면으로 이동
+      context.push(
+        '${GoRoutes.signIn.fullPath}${GoRoutes.verifyPhoneNumber.fullPath}${GoRoutes.userInputInfo.fullPath}${GoRoutes.teamSelect.fullPath}',
+        extra: TeamSelectView(token: widget.token),
+      );
     }
 
     return Scaffold(
@@ -123,7 +130,7 @@ class _UserInputInfoViewState extends ConsumerState<UserInputInfoView> {
                       const Icon(FontAwesomeIcons.calendar),
                       const Gap(16),
                       Text(
-                        formatDate(pickedDate),
+                        Utils.formatDate(pickedDate),
                         style: const TextStyle(
                           decoration: TextDecoration.underline,
                         ),

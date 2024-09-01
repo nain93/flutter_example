@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/screens/home/widgets/home_stadium_list.dart';
+import 'package:flutter_example/screens/home/widgets/recommend_list.dart';
 import 'package:flutter_example/utils/router_config.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -11,7 +12,25 @@ class HomeView extends StatefulHookConsumerWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends ConsumerState<HomeView> {
+class _HomeViewState extends ConsumerState<HomeView>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(vsync: this, length: 2);
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,72 +40,63 @@ class _HomeViewState extends ConsumerState<HomeView> {
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '오늘의 직관',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              const Gap(15),
-              Container(
-                padding: const EdgeInsets.all(15),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '6/4 경기',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                    const Text('4명중에 4명 확정'),
-                    Text(
-                      'memo',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                    const Text('18시까지 3번 출구에서 만나요 룰루랄라룰루랄라'),
-                  ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsetsDirectional.symmetric(horizontal: 15),
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Theme.of(context).dividerColor,
+                  width: 1,
                 ),
               ),
-              const Gap(20),
-              Text(
-                '다음 직관',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              const Gap(15),
-              Container(
-                padding: const EdgeInsets.all(15),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '6/6 경기',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                    const Text('4명중에 4명 확정'),
-                    Text(
-                      'memo',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                    const Text('18시까지 3번 출구에서 만나요 룰루랄라룰루랄라'),
-                  ],
+            ),
+            child: TabBar(
+              labelColor: Colors.black,
+              unselectedLabelColor: Theme.of(context).disabledColor,
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
+              isScrollable: true,
+              dividerHeight: 0,
+              controller: _tabController,
+              indicator: const BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.black,
+                    width: 1,
+                  ),
                 ),
               ),
-            ],
+              indicatorSize: TabBarIndicatorSize.tab,
+              labelPadding: const EdgeInsets.symmetric(
+                vertical: 12,
+              ),
+              tabAlignment: TabAlignment.start,
+              tabs: [
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: const Text('추천 직관'),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: const Text('홈구장별 직관'),
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: const [
+                RecommendList(),
+                HomeStadiumList(),
+              ],
+            ),
+          ),
+        ],
+      )),
     );
   }
 }

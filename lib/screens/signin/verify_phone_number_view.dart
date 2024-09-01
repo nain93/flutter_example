@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_example/screens/signin/user_input_info_view.dart';
 import 'package:flutter_example/utils/router_config.dart';
 import 'package:flutter_example/widgets/animated_switcher.dart';
 import 'package:flutter_example/widgets/app_bar.dart';
@@ -64,16 +65,18 @@ class _VerifyPhoneNumberViewState extends ConsumerState<VerifyPhoneNumberView> {
       });
     }
 
-    void onPressedRequestVerify() {
+    void onPressedRequestVerify() async {
       setState(() {
         isPressedVerify = true;
       });
     }
 
     void onPressedVerify() {
-      // TODO: 번호 인증 확인 되면 토큰가지고 회원정보 입력화면으로 이동
+      // 번호 인증 확인 되면 토큰가지고 회원정보 입력화면으로 이동
       context.push(
-          '${GoRoutes.signIn.fullPath}${GoRoutes.verifyPhoneNumber.fullPath}${GoRoutes.userInputInfo.fullPath}');
+        '${GoRoutes.signIn.fullPath}${GoRoutes.verifyPhoneNumber.fullPath}${GoRoutes.userInputInfo.fullPath}',
+        extra: UserInputInfoView(token: widget.token),
+      );
     }
 
     return Scaffold(

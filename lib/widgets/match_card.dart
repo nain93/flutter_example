@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+class MatchCard extends StatefulHookConsumerWidget {
+  const MatchCard({super.key});
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _MatchCardState();
+}
+
+class _MatchCardState extends ConsumerState<MatchCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(15),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '6/4 경기',
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+          const Text('4명중에 4명 확정'),
+          Text(
+            'memo',
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+          const Text('18시까지 3번 출구에서 만나요 룰루랄라룰루랄라'),
+        ],
+      ),
+    );
+  }
+}

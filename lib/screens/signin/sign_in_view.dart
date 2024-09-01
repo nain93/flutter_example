@@ -41,7 +41,6 @@ class _SignInViewState extends ConsumerState<SignInView> {
             ? await kakao.UserApi.instance.loginWithKakaoTalk()
             : await kakao.UserApi.instance.loginWithKakaoAccount();
 
-        // await ref.read(authProviderProvider.notifier).signIn(token.accessToken);
         if (context.mounted) {
           context.push(
             '${GoRoutes.signIn.fullPath}${GoRoutes.verifyPhoneNumber.fullPath}',

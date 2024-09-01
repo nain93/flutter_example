@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_example/repositories/token_repository.dart';
 import 'package:flutter_example/screens/home/create_room_view.dart';
 import 'package:flutter_example/screens/home/home_view.dart';
+import 'package:flutter_example/screens/home/match_detail.dart';
 import 'package:flutter_example/screens/match_list/match_list_view.dart';
 import 'package:flutter_example/screens/message/chat_room_view.dart';
 import 'package:flutter_example/screens/message/message_view.dart';
 import 'package:flutter_example/screens/my/my_view.dart';
 import 'package:flutter_example/screens/signin/email_sign_in_view.dart';
 import 'package:flutter_example/screens/signin/sign_in_view.dart';
+import 'package:flutter_example/screens/signin/team_select_view.dart';
 import 'package:flutter_example/screens/signin/user_input_info_view.dart';
 import 'package:flutter_example/screens/signin/verify_phone_number_view.dart';
 import 'package:flutter_example/widgets/main_bottom_tab.dart';
@@ -22,12 +24,14 @@ enum GoRoutes {
   emailSignIn,
   verifyPhoneNumber,
   userInputInfo,
+  teamSelect,
   home,
   matchList,
   message,
   my,
   createRoom,
   chatRoom,
+  matchDetail,
 }
 
 extension GoRoutesName on GoRoutes {
@@ -209,12 +213,31 @@ final routeProvider = Provider(
                 name: GoRoutes.userInputInfo.name,
                 path: GoRoutes.userInputInfo.path,
                 pageBuilder: (context, state) {
+                  var userInputInfo = state.extra as UserInputInfoView;
                   return buildIosPageTransitions<void>(
                     context: context,
                     state: state,
-                    child: const UserInputInfoView(),
+                    child: UserInputInfoView(
+                      token: userInputInfo.token,
+                    ),
                   );
                 },
+                routes: [
+                  GoRoute(
+                    name: GoRoutes.teamSelect.name,
+                    path: GoRoutes.teamSelect.path,
+                    pageBuilder: (context, state) {
+                      var teamSelect = state.extra as TeamSelectView;
+                      return buildIosPageTransitions<void>(
+                        context: context,
+                        state: state,
+                        child: TeamSelectView(
+                          token: teamSelect.token,
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),
@@ -230,6 +253,17 @@ final routeProvider = Provider(
             },
           ),
         ],
+      ),
+      GoRoute(
+        name: GoRoutes.matchDetail.name,
+        path: GoRoutes.matchDetail.fullPath,
+        pageBuilder: (context, state) {
+          return buildIosPageTransitions<void>(
+            context: context,
+            state: state,
+            child: const MatchDetail(),
+          );
+        },
       ),
     ],
   ),

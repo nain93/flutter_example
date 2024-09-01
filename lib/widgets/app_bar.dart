@@ -39,7 +39,7 @@ class AppBarBack extends StatelessWidget implements PreferredSizeWidget {
             icon: const FaIcon(
               FontAwesomeIcons.chevronLeft,
               color: Colors.black,
-              size: 22,
+              size: 18,
             ),
             onPressed: () {
               if (onPressedBack != null) {

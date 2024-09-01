@@ -16,8 +16,10 @@ class _CreateRoomViewState extends ConsumerState<CreateRoomView> {
       appBar: AppBarBack(
         title: '직관 모집',
       ),
-      body: Center(
-        child: Text('Create Room View'),
+      body: SafeArea(
+        child: Column(
+          children: [],
+        ),
       ),
     );
   }
