@@ -40,63 +40,64 @@ class _HomeViewState extends ConsumerState<HomeView>
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsetsDirectional.symmetric(horizontal: 15),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: Theme.of(context).dividerColor,
-                  width: 1,
-                ),
-              ),
-            ),
-            child: TabBar(
-              labelColor: Colors.black,
-              unselectedLabelColor: Theme.of(context).disabledColor,
-              overlayColor: WidgetStateProperty.all(Colors.transparent),
-              isScrollable: true,
-              dividerHeight: 0,
-              controller: _tabController,
-              indicator: const BoxDecoration(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsetsDirectional.symmetric(horizontal: 15),
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
-                    color: Colors.black,
+                    color: Theme.of(context).dividerColor,
                     width: 1,
                   ),
                 ),
               ),
-              indicatorSize: TabBarIndicatorSize.tab,
-              labelPadding: const EdgeInsets.symmetric(
-                vertical: 12,
+              child: TabBar(
+                labelColor: Colors.black,
+                unselectedLabelColor: Theme.of(context).disabledColor,
+                overlayColor: WidgetStateProperty.all(Colors.transparent),
+                isScrollable: true,
+                dividerHeight: 0,
+                controller: _tabController,
+                indicator: const BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Colors.black,
+                      width: 1,
+                    ),
+                  ),
+                ),
+                indicatorSize: TabBarIndicatorSize.tab,
+                labelPadding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                ),
+                tabAlignment: TabAlignment.start,
+                tabs: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    child: const Text('추천 직관'),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    child: const Text('홈구장별 직관'),
+                  ),
+                ],
               ),
-              tabAlignment: TabAlignment.start,
-              tabs: [
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  child: const Text('추천 직관'),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  child: const Text('홈구장별 직관'),
-                ),
-              ],
             ),
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: const [
-                RecommendList(),
-                HomeStadiumList(),
-              ],
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: const [
+                  RecommendList(),
+                  HomeStadiumList(),
+                ],
+              ),
             ),
-          ),
-        ],
-      )),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -2,15 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_example/screens/signin/verify_phone_number_view.dart';
-import 'package:flutter_example/utils/router_config.dart';
+import 'package:flutter_example/widgets/api.dart';
 import 'package:flutter_example/widgets/button.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart' as kakao;
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk_template.dart'
-    as kakao_install;
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class SignInView extends StatefulHookConsumerWidget {
@@ -35,20 +30,32 @@ class _SignInViewState extends ConsumerState<SignInView> {
         kakaoLoading = true;
       });
       try {
-        var isInstalled = await kakao_install.isKakaoTalkInstalled();
+        var result = await dio.get('/kakao/login');
+        debugPrint('kakaoResult:${result.data}');
 
-        var token = isInstalled
-            ? await kakao.UserApi.instance.loginWithKakaoTalk()
-            : await kakao.UserApi.instance.loginWithKakaoAccount();
+        // var isInstalled = await kakao_install.isKakaoTalkInstalled();
+
+        // var token = isInstalled
+        //     ? await kakao.UserApi.instance.loginWithKakaoTalk()
+        //     : await kakao.UserApi.instance.loginWithKakaoAccount();
+
+        // var result = await dio.get(
+        //   '/kakao/login',
+        //   options: Options(
+        //     headers: {
+        //       'Authorization': 'Bearer ${token.accessToken}',
+        //     },
+        //   ),
+        // );
 
         if (context.mounted) {
-          context.push(
-            '${GoRoutes.signIn.fullPath}${GoRoutes.verifyPhoneNumber.fullPath}',
-            extra: VerifyPhoneNumberView(token: token.accessToken),
-          );
+          // context.push(
+          //   '${GoRoutes.signIn.fullPath}${GoRoutes.verifyPhoneNumber.fullPath}',
+          //   extra: VerifyPhoneNumberView(token: token.accessToken),
+          // );
         }
       } catch (e) {
-        // TODO: toast message
+        debugPrint('resultError:$e');
       }
       setState(() {
         kakaoLoading = false;

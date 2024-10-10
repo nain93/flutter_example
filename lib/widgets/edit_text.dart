@@ -29,6 +29,7 @@ class EditText extends StatefulWidget {
     this.borderColor,
     this.inputFormatters,
     this.autofocus,
+    this.counterText,
   });
 
   final void Function(String) onChanged;
@@ -56,6 +57,7 @@ class EditText extends StatefulWidget {
   final void Function()? onTap;
   final Color? borderColor;
   final bool? autofocus;
+  final String? counterText;
 
   @override
   State<EditText> createState() => _EditTextState();
@@ -87,7 +89,7 @@ class _EditTextState extends State<EditText> {
         cursorColor: Theme.of(context).colorScheme.secondary,
         style: Theme.of(context).textTheme.bodyMedium?.merge(widget.style),
         decoration: InputDecoration(
-          counterText: '',
+          counterText: widget.counterText,
           suffixIcon: widget.suffixIcon,
           contentPadding: widget.inputPadding ?? const EdgeInsets.all(15),
           hintText: widget.hintText,

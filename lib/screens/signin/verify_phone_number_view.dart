@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_example/screens/signin/user_input_info_view.dart';
 import 'package:flutter_example/utils/router_config.dart';
@@ -66,6 +67,35 @@ class _VerifyPhoneNumberViewState extends ConsumerState<VerifyPhoneNumberView> {
     }
 
     void onPressedRequestVerify() async {
+      // var result =
+      //     await dio.post('https://api.iamport.kr/users/getToken', data: {
+      //   'imp_key': '7815234467244345',
+      //   'imp_secret':
+      //       'M1KeDE6k8tpNYgooUDpgNmttmdbItAkZBNvBz6pUk8mkvGsvqh2KObuNWHEXdhf89Vh4oY7YTUTZ49eb',
+      // });
+      // var accessToken = result.data['response']['access_token'];
+
+      // await dio.post(
+      //   'https://api.iamport.kr/certifications/otp/request',
+      //   data: {
+      //     "name": "구남규",
+      //     "phone": "01055426071",
+      //     "birth": "930114",
+      //     "gender_digit": "1",
+      //     "carrier": "KT",
+      //     "is_mvno": true,
+      //     // "company": "company",
+      //     // "merchant_uid": "merchant_uid",
+      //     // "pg": "pg",
+      //   },
+      //   options: Options(
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //       'Authorization': 'Bearer $accessToken',
+      //     },
+      //   ),
+      // );
+
       setState(() {
         isPressedVerify = true;
       });

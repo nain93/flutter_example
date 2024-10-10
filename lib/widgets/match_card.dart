@@ -15,7 +15,7 @@ class _MatchCardState extends ConsumerState<MatchCard> {
       padding: const EdgeInsets.all(15),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+        color: Theme.of(context).colorScheme.onPrimary,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(

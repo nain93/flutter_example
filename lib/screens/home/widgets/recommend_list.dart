@@ -15,7 +15,8 @@ class RecommendList extends StatefulHookConsumerWidget {
 class _RecommendListState extends ConsumerState<RecommendList> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      color: Theme.of(context).colorScheme.surfaceContainer.withOpacity(0.5),
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
