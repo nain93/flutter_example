@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "961294027874",
+    "project_id": "lets-go-baseball",
+    "storage_bucket": "lets-go-baseball.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961294027874:android:7dea4080c2e7dfe096d53b",
+        "android_client_info": {
+          "package_name": "com.example.flutter_example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961294027874-sfc7on1iiqeh9o8995m213odrv6269cn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyIOFJkfLjm6tn1LhDwdT5DkXqpHV1Idc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961294027874-sfc7on1iiqeh9o8995m213odrv6269cn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "961294027874-24n4sdc5r239eivgiv2ifblmoefpkuak.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterExample"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961294027874:android:2601fdaf0a8a786e96d53b",
+        "android_client_info": {
+          "package_name": "com.example.social_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961294027874-u283p9g8tde95d94bj60fc0kordjl1ot.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.social_login",
+            "certificate_hash": "941b9753fa56c764316c85aef29795a7f95a6fef"
+          }
+        },
+        {
+          "client_id": "961294027874-sfc7on1iiqeh9o8995m213odrv6269cn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyIOFJkfLjm6tn1LhDwdT5DkXqpHV1Idc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961294027874-sfc7on1iiqeh9o8995m213odrv6269cn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "961294027874-24n4sdc5r239eivgiv2ifblmoefpkuak.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterExample"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
